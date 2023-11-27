@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+
+{%block content%}
+{% comment %} {% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message:</strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+{% endfor %} {% endcomment %}
+
+{% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="login-container">
+        <h2>Login to YourSite</h2>
+        <form action="/signin" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" name="username" id="username" placeholder="User Name" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="pass1" id="pass1" placeholder="Password" required>
+          </div>
+          <button type="submit" class="btn btn-dark btn-block login-btn">Log In</button>
+        </form>
+        <div class="text-center mt-3"> <!-- Added mt-3 class for margin-top -->
+          <button type="button" class="btn btn-dark btn-signup"><a href='/signup' style="color: white; text-decoration: none;">Sign Up</a></button>
+        </div>
+        <!-- Uncomment the following line if needed -->
+        <!-- <a href="#" class="signup-link">Sign Up for YourSite</a> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  {% endblock %}
